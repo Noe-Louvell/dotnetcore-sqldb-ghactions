@@ -128,7 +128,7 @@
             "name": "[parameters('webappName')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "tags": {
                 "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('aspName'))]": "Resource",
                 "displayName": "[parameters('webappName')]"
@@ -145,7 +145,7 @@
             "name": "[parameters('aspName')]",
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "[parameters('aspSKU')]",
                 "capacity": 1
@@ -162,7 +162,7 @@
             "type": "Microsoft.Web/sites/slots",
             "name": "[concat(parameters('webappName'), '/', 'staging')]",
             "kind": "app",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "comments": "This specifies the web app slots.",
             "tags": {
                 "displayName": "WebAppSlots"
@@ -177,7 +177,7 @@
         {
             "name": "[parameters('sqlServerName')]",
             "type": "Microsoft.Sql/servers",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "apiVersion": "2019-06-01-preview",
             "tags": {
             "app": "[parameters('webAppName')]"
@@ -191,7 +191,7 @@
             {
                 "name": "[parameters('databaseName')]",
                 "type": "databases",
-                "location": "East US",
+                "location": "[resourceGroup().location]",
                 "tags": {
                 "app": "[parameters('webAppName')]"
                 },
@@ -212,7 +212,7 @@
             {
                 "name": "AllowAllWindowsAzureIps",
                 "type": "firewallrules",
-                "location": "East US",
+                "location": "[resourceGroup().location]",
                 "apiVersion": "2014-04-01-preview",
                 "dependsOn": [
                 "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
